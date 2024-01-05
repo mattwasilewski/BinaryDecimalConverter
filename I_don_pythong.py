@@ -1,51 +1,28 @@
-    """
-    Klasa Converter zawiera metody do przekształcania liczb między systemem binarnym a dziesiętnym.
-
-    Metody:
-    - binary_to_decimal(binary): Przekształca liczbę binarną na dziesiętną.
-    - decimal_to_binary(decimal): Przekształca liczbę dziesiętną na binarną.
-    - convert(): Obsługuje interakcję z użytkownikiem, umożliwiając mu wybór rodzaju przekształcenia.
-
-    Przykłady użycia:
-    converter = Converter()
-    converter.convert()
-    """
-        """
-        def binary_to_decimal(self, binary):
-        
-        Przekształca liczbę binarną na dziesiętną.
-
-        Args:
-        binary (str): Liczba binarna jako ciąg znaków.
-
-        Returns:
-        int: Liczba dziesiętna.
-        """
-          """
-            def decimal_to_binary(self, decimal):
-        
-        Przekształca liczbę dziesiętną na binarną.
-
-        Args:
-        decimal (int): Liczba dziesiętna.
-
-        Returns:
-        str: Liczba binarna jako ciąg znaków.
-        """
-    """
-    def convert(self):
-        
-        Obsługuje interakcję z użytkownikiem, umożliwiając mu wybór rodzaju przekształcenia.
-        Użytkownik może przekształcić liczbę z systemu binarnego na dziesiętny lub z systemu dziesiętnego na binarny.
-        """
 class Converter:
-    def binary_to_decimal(self, binary):
-        decimal = 0
-        binary = str(binary)
-        if not all(bit in '01' for bit in binary):
+    def validate_input_binary_decimal(self, input_str):
+        if not all(bit in '01' for bit in input_str):
             print("Błędna liczba binarna. Wprowadź poprawną liczbę binarną.")
+            return False
+        return True
+
+    def validate_input_decimal_binary(self, input_str):
+        try:
+            decimal_number = int(input_str)
+            if decimal_number < 0:
+                print("Błędna liczba dziesiętna. Wprowadź liczbę większą lub równą zero.")
+                return False
+            return True
+        except ValueError:
+            print("Błędna liczba dziesiętna. Wprowadź liczbę całkowitą.")
+            return False
+
+    def binary_to_decimal(self, binary):
+        binary = str(binary)
+
+        if not self.validate_input_binary_decimal(binary):
             return None
 
+        decimal = 0
         binary = binary[::-1]
         for i in range(len(binary)):
             if binary[i] == '1':
@@ -53,8 +30,7 @@ class Converter:
         return decimal
 
     def decimal_to_binary(self, decimal):
-        if decimal < 0:
-            print("Błędna liczba dziesiętna. Wprowadź liczbę większą lub równą zero.")
+        if not self.validate_input_decimal_binary(str(decimal)):
             return None
 
         binary = ''
@@ -83,13 +59,10 @@ class Converter:
                 if decimal_result is not None:
                     print(f'{binary_number} w systemie dziesiętnym to: {decimal_result}')
             elif choice == '2':
-                try:
-                    decimal_number = int(input("Podaj liczbę dziesiętną: "))
-                    binary_result = self.decimal_to_binary(decimal_number)
-                    if binary_result is not None:
-                        print(f'{decimal_number} w systemie binarnym to: {binary_result}')
-                except ValueError:
-                    print("Błędna liczba dziesiętna. Wprowadź liczbę całkowitą.")
+                decimal_number = input("Podaj liczbę dziesiętną: ")
+                binary_result = self.decimal_to_binary(decimal_number)
+                if binary_result is not None:
+                    print(f'{decimal_number} w systemie binarnym to: {binary_result}')
             else:
                 print("Błędny wybór. Wybierz 1, 2 lub wpisz 'exit'.")
 
