@@ -1,17 +1,28 @@
 class Converter:
-    def validate_input_binary_decimal(self, input_str, is_binary=True):
-        """
-        Sprawdza poprawność wprowadzonej liczby binarnej lub dziesiętnej.
 
-        :param input_str: Wprowadzona liczba binarna lub dziesiętna.
-        :param is_binary: Określa, czy sprawdzać poprawność liczby binarnej (domyślnie True).
-        :return: True, jeśli liczba jest poprawna; False w przeciwnym razie.
+
+    def validate_binary_input(self, input_str):
         """
-        valid_chars = '01' if is_binary else '0123456789'
-        if not all(bit in valid_chars for bit in input_str):
-            print(f"Błędna liczba {'binarna' if is_binary else 'dziesiętna'}. Wprowadź poprawną liczbę.")
-            return False
-        return True
+        Sprawdza poprawność wprowadzonej liczby binarnej.
+        :param input_str: Wprowadzona liczba binarna.
+        :return: Liczba binarna jako ciąg znaków, jeśli liczba jest poprawna; None w przeciwnym razie.
+        """
+        if not all(bit in '01' for bit in input_str):
+            print("Błędna liczba binarna")
+            return None
+        return input_str
+
+    def validate_decimal_input(self, input_str):
+        """
+        Sprawdza poprawność wprowadzonej liczby dziesiętnej.
+        :param input_str: Wprowadzona liczba dziesiętna.
+        :return: Liczba dziesiętna jako ciąg znaków, jeśli jest poprawna; None w przeciwnym razie.
+        """
+        if not all(char in '0123456789' for char in input_str):
+            print("Błędna liczba dziesiętna")
+            return None
+        return input_str
+
 
     def binary_to_decimal(self, binary):
         """
@@ -20,10 +31,11 @@ class Converter:
         :param binary: Wprowadzona liczba binarna.
         :return: Liczba dziesiętna lub None, jeśli wprowadzona liczba jest niepoprawna.
         """
-        binary = str(binary)
 
-        if not self.validate_input_binary_decimal(binary):
+        if not self.validate_binary_input(binary):
             return None
+        
+        binary = int(binary)
 
         decimal = 0
         binary = binary[::-1]
@@ -32,6 +44,7 @@ class Converter:
                 decimal += 2 ** i
         return decimal
 
+
     def decimal_to_binary(self, decimal):
         """
         Konwertuje liczbę dziesiętną na binarną.
@@ -39,15 +52,16 @@ class Converter:
         :param decimal: Wprowadzona liczba dziesiętna.
         :return: Liczba binarna lub None, jeśli wprowadzona liczba jest niepoprawna.
         """
-        if not self.validate_input_binary_decimal(str(decimal), is_binary=False):
+        if not self.validate_decimal_input(decimal):
             return None
-
+        
+        decimal = int(decimal)
         binary = ''
         while decimal > 0:
-            remainder = decimal % 2
-            binary = str(remainder) + binary
+            binary = str(decimal % 2) + binary
             decimal //= 2
         return binary
+
 
     def print_menu(self):
         """
@@ -63,12 +77,8 @@ class Converter:
         """
         while True:
             self.print_menu()
-
             choice = input("Twój wybór (1 lub 2), lub wpisz 'exit' aby zakończyć: ")
-
-            if choice.lower() == 'exit':
-                return
-            elif choice == '1':
+            if choice == '1':
                 binary_number = input("Podaj liczbę binarną: ")
                 decimal_result = self.binary_to_decimal(binary_number)
                 if decimal_result is not None:
@@ -78,8 +88,12 @@ class Converter:
                 binary_result = self.decimal_to_binary(decimal_number)
                 if binary_result is not None:
                     print(f'{decimal_number} w systemie binarnym to: {binary_result}')
+            elif choice.lower() == 'exit':
+                return
             else:
                 print("Błędny wybór. Wybierz 1, 2 lub wpisz 'exit'.")
+
+
 
 if __name__ == "__main__":
     converter = Converter()
