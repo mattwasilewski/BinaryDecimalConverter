@@ -1,3 +1,5 @@
+import os
+
 class Converter:
 
 
@@ -8,6 +10,7 @@ class Converter:
         :return: Liczba binarna jako ciąg znaków, jeśli liczba jest poprawna; None w przeciwnym razie.
         """
         if not input_str or not all(bit in '01' for bit in input_str):
+            print("Błędna liczba", flush=True)
             return None
         return input_str
 
@@ -18,6 +21,7 @@ class Converter:
         :return: Liczba dziesiętna jako ciąg znaków, jeśli jest poprawna; None w przeciwnym razie.
         """
         if not input_str or not all(char in '0123456789' for char in input_str):
+            print("Błędna liczba", flush=True)
             return None
         return input_str
 
@@ -77,12 +81,16 @@ class Converter:
                 binary_number = input("Podaj liczbę binarną: ")
                 decimal_result = self.binary_to_decimal(binary_number)
                 if decimal_result is not None:
+                    os.system('cls')
                     print(f'{binary_number} w systemie dziesiętnym to: {decimal_result}')
+                    print()
             elif choice == '2':
                 decimal_number = input("Podaj liczbę dziesiętną: ")
                 binary_result = self.decimal_to_binary(decimal_number)
                 if binary_result is not None:
-                    print(f'{decimal_number} w systemie binarnym to: {binary_result}')
+                    os.system('cls')
+                    print(f'{decimal_number} w systemie binarnym to: {binary_result}' + "\n")
+                    print()
             elif choice.lower() == 'exit':
                 return
             else:
