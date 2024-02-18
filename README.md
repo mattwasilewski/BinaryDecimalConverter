@@ -2,7 +2,17 @@
 
 Binary Decimal Converter jest to w pełni otestowana aplikacja konsolowa napisana w języku Python. Umożliwia ona konwersję liczb między systemem binarnym a dziesiętnym. 
 
+## Uruchomienie aplikacji
+Upewnij się, że masz zainstalowanego Pythona w wersji 3.x  
+Aby uruchomić aplikację, otwórz terminal w katalogu projektu i wykonaj polecenie:
 
+python converter.py
+
+## Uruchamianie testów
+
+Testy aplikacji są zdefiniowane w pliku `test.py`. Aby uruchomić testy, użyj polecenia:
+
+python -m unittest test
 
 ## User Stories:
 
