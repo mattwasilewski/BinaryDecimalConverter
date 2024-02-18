@@ -10,7 +10,8 @@ class Converter:
         :return: Liczba binarna jako ciąg znaków, jeśli liczba jest poprawna; None w przeciwnym razie.
         """
         if not input_str or not all(bit in '01' for bit in input_str):
-            print("Błędna liczba", flush=True)
+            os.system('cls')
+            print("Błędna liczba")
             return None
         return input_str
 
@@ -21,7 +22,8 @@ class Converter:
         :return: Liczba dziesiętna jako ciąg znaków, jeśli jest poprawna; None w przeciwnym razie.
         """
         if not input_str or not all(char in '0123456789' for char in input_str):
-            print("Błędna liczba", flush=True)
+            os.system('cls')
+            print("Błędna liczba")
             return None
         return input_str
 
@@ -48,7 +50,7 @@ class Converter:
         Konwertuje liczbę dziesiętną na binarną.
 
         :param decimal: Wprowadzona liczba dziesiętna.
-        :return: Liczba binarna lub None, jeśli wprowadzona liczba jest niepoprawna.
+        :return: Liczba binarna(dodatkowe sprawdzenie) lub None, jeśli wprowadzona liczba jest niepoprawna.
         """
         if not self.validate_decimal_input(decimal):
             return None
