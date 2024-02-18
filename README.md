@@ -1,6 +1,6 @@
 # BinaryDecimalConverter
 
-Binary Decimal Converter jest to aplikacja konsolowa napisana w języku Python. Umożliwia ona konwersję liczb między systemem binarnym a dziesiętnym. 
+Binary Decimal Converter jest to w pełni otestowana aplikacja konsolowa napisana w języku Python. Umożliwia ona konwersję liczb między systemem binarnym a dziesiętnym. 
 
 
 
